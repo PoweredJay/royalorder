@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D body;
     float horizontal;
     float vertical;
-    float moveSpeed = 20;
+    float moveSpeed = 14;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,18 +18,24 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("up"))
+        if (Input.GetKey("up")){
             vertical = 1;
-        else if (Input.GetKey("down"))
+        }
+        else if (Input.GetKey("down")){
             vertical = -1;
-        else
+        }
+        else {
             vertical = 0;
-        if (Input.GetKey("left"))
+        }
+        if (Input.GetKey("left")){
             horizontal = -1;
-        else if (Input.GetKey("right"))
+        }
+        else if (Input.GetKey("right")){
             horizontal = 1;
-        else
+        }
+        else{
             horizontal = 0;
+        }
     }
 
     void FixedUpdate()
