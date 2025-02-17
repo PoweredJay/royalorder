@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MenuSystem : MonoBehaviour
 {
@@ -19,15 +22,96 @@ public class MenuSystem : MonoBehaviour
     public static bool musicOn = true;
     public static bool sfxOn = true;
     GameObject lastSelect;
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+        menuMusic = GetComponent<AudioSource>();
+        menuMusic.Play();
+        menuMusic.loop = true;
+        EventSystem.current.SetSelectedGameObject(mainMenu.transform.GetChild(0).gameObject);
+        lastSelect = new GameObject();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        VolumeSlider();
+        if (!musicOn)
+        {
+            menuMusic.volume = 0;
+        } else
+        {
+            menuMusic.volume = volume;
+        }
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastSelect);
+        } else
+        {
+            lastSelect = EventSystem.current.currentSelectedGameObject;
+        }
     }
+
+    // button hell
+    public void MainStartButton()
+    {
+        SceneManager.LoadScene("levelScene");
+    }
+
+    public void MainOptionsButton()
+    {
+        mainMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(optionsMenu.transform.GetChild(0).gameObject);
+    }
+
+    public void MainQuitButton()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public void OptionsAudioButton()
+    {
+        optionsMenu.SetActive(false);
+        audioMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(audioMenu.transform.GetChild(0).gameObject);
+    }
+
+    public void OptionsKeybindsButton()
+    {
+        optionsMenu.SetActive(false);
+        keybindsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(keybindsMenu.transform.GetChild(0).gameObject);
+    }
+
+    public void OptionsBackButton()
+    {
+        optionsMenu.SetActive(false);
+        mainMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(mainMenu.transform.GetChild(0).gameObject);
+    }
+
+    public void AudioBackButton()
+    {
+        audioMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(optionsMenu.transform.GetChild(0).gameObject);
+    }
+
+    public void KeybindsBackButton()
+    {
+        keybindsMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(optionsMenu.transform.GetChild(0).gameObject);
+    }
+
+    // volume things
+    public void VolumeSlider() => volume = volumeSlider.value;
+    public void MusicToggle()
+    {
+        musicOn = musicToggle.isOn;
+        Debug.Log("Music is " + musicToggle.isOn);
+    }
+
+    public void SFXToggle() => sfxOn = sfxToggle.isOn;
 }
