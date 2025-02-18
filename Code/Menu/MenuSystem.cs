@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public class MenuSystem : MonoBehaviour
 {
-    private AudioSource menuMusic;
 
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -17,19 +16,19 @@ public class MenuSystem : MonoBehaviour
     public Slider volumeSlider;
     public Toggle musicToggle;
     public Toggle sfxToggle;
+    public MusicClass menuMus;
 
-    public static float volume = 1;
+    public static float globalVolume = 1;
     public static bool musicOn = true;
     public static bool sfxOn = true;
     GameObject lastSelect;
 
     void Start()
     {
-        menuMusic = GetComponent<AudioSource>();
-        menuMusic.Play();
-        menuMusic.loop = true;
         EventSystem.current.SetSelectedGameObject(mainMenu.transform.GetChild(0).gameObject);
         lastSelect = new GameObject();
+        menuMus = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>();
+        menuMus.PlayMusic();
     }
 
     void Update()
@@ -37,10 +36,10 @@ public class MenuSystem : MonoBehaviour
         VolumeSlider();
         if (!musicOn)
         {
-            menuMusic.volume = 0;
+            menuMus.ChangeVolume(0f);
         } else
         {
-            menuMusic.volume = volume;
+            menuMus.ChangeVolume(globalVolume);
         }
         if (EventSystem.current.currentSelectedGameObject == null)
         {
@@ -106,7 +105,7 @@ public class MenuSystem : MonoBehaviour
     }
 
     // volume things
-    public void VolumeSlider() => volume = volumeSlider.value;
+    public void VolumeSlider() => globalVolume = volumeSlider.value;
     public void MusicToggle()
     {
         musicOn = musicToggle.isOn;
