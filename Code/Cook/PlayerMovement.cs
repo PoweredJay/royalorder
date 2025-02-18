@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         else{
             horizontal = 0;
         }
+        this.transform.rotation = new Quaternion(0,0,0,0);
     }
 
     void FixedUpdate()
