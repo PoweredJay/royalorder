@@ -19,12 +19,12 @@ public class ApplianceInteract : MonoBehaviour
         {
             if (Vector2.Distance(obj.transform.position, player.transform.position) <= 1.15)
             {
-                Debug.Log("Interact");
+                Debug.Log(obj.tag);
+                if (obj.tag.Equals("Held"))
+                {
+                    obj.transform.SetParent(player.transform,true);
+                }
                 // check tag of obj for interactions, make this once items can be held and shit
-            }
-            else
-            {
-                Debug.Log("Nothing");
             }
         }
         
