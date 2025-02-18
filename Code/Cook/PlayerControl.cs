@@ -19,9 +19,9 @@ public class PlayerControl : MonoBehaviour
         if(Input.GetKeyDown("return") || Input.GetKeyDown("z"))
         {
             if(HasCloseObject()){
-                Debug.Log(GetClosestObject().name);
+                // Debug.Log(GetClosestObject().name);
             } else {
-                Debug.Log("Nothing within " + InteractDistance + " units.");
+                // Debug.Log("Nothing within " + InteractDistance + " units.");
             }
 
         }
