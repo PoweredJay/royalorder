@@ -31,7 +31,7 @@ public class PlayerControl : MonoBehaviour
        float closest = InteractDistance;
         GameObject closestObject = null;
         GameObject[] interactables = GameObject.FindGameObjectsWithTag("Interactable");
-        for (int i = 0; i < interactables.Count; i++)  //list of gameObjects to search through
+        for (int i = 0; i < interactables.Length; i++)  //list of gameObjects to search through
         {
             float dist = Vector2.Distance(interactables[ i ].transform.position, this.transform.position);
             if (dist < closest)
@@ -51,7 +51,7 @@ public class PlayerControl : MonoBehaviour
         float closest = InteractDistance;
         GameObject closestObject = null;
         GameObject[] interactables = GameObject.FindGameObjectsWithTag("Interactable");
-        for (int i = 0; i < interactables.Count; i++)  //list of gameObjects to search through
+        for (int i = 0; i < interactables.Length; i++)  //list of gameObjects to search through
         {
             float dist = Vector2.Distance(interactables[ i ].transform.position, this.transform.position);
             if (dist < closest)
