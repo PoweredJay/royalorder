@@ -54,7 +54,7 @@ public class MenuSystem : MonoBehaviour
     // button hell
     public void MainStartButton()
     {
-        SceneManager.LoadScene("levelScene");
+        SceneManager.LoadScene("LevelSelect");
     }
 
     public void MainOptionsButton()
