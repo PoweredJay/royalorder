@@ -1951,7 +1951,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeld: 0
-<<<<<<< HEAD
   itemName: Bread
   gold: 1
   timer: 5
@@ -1959,9 +1958,7 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
-=======
   itemSprite: {fileID: 0}
->>>>>>> master
 --- !u!114 &69527058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1976,10 +1973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 69527055}
   player: {fileID: 1366564828}
-<<<<<<< HEAD
   isHeld: 0
-=======
->>>>>>> master
 --- !u!4 &69527059
 Transform:
   m_ObjectHideFlags: 0
@@ -2124,7 +2118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeld: 0
-<<<<<<< HEAD
   itemName: Bread
   gold: 1
   timer: 5
@@ -2132,9 +2125,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
-=======
-  itemSprite: {fileID: 0}
->>>>>>> master
 --- !u!114 &246990234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2149,10 +2139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 246990231}
   player: {fileID: 1366564828}
-<<<<<<< HEAD
   isHeld: 0
-=======
->>>>>>> master
 --- !u!4 &246990235
 Transform:
   m_ObjectHideFlags: 0
@@ -2252,7 +2239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeld: 0
-<<<<<<< HEAD
   itemName: Bread
   gold: 1
   timer: 5
@@ -2260,9 +2246,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
-=======
-  itemSprite: {fileID: 0}
->>>>>>> master
 --- !u!114 &300739121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2277,10 +2260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 300739118}
   player: {fileID: 1366564828}
-<<<<<<< HEAD
   isHeld: 0
-=======
->>>>>>> master
 --- !u!4 &300739122
 Transform:
   m_ObjectHideFlags: 0
@@ -2380,7 +2360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeld: 0
-<<<<<<< HEAD
   itemName: Bread
   gold: 1
   timer: 5
@@ -2388,9 +2367,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
-=======
-  itemSprite: {fileID: 0}
->>>>>>> master
 --- !u!114 &687278996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,10 +2381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 687278993}
   player: {fileID: 1366564828}
-<<<<<<< HEAD
   isHeld: 0
-=======
->>>>>>> master
 --- !u!4 &687278997
 Transform:
   m_ObjectHideFlags: 0
@@ -2937,10 +2910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 1814490874}
   player: {fileID: 1366564828}
-<<<<<<< HEAD
   isHeld: 0
-=======
->>>>>>> master
 --- !u!4 &1814490876
 Transform:
   m_ObjectHideFlags: 0
@@ -3921,10 +3891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 2040501925}
   player: {fileID: 1366564828}
-<<<<<<< HEAD
   isHeld: 0
-=======
->>>>>>> master
 --- !u!4 &2040501927
 Transform:
   m_ObjectHideFlags: 0
@@ -3953,7 +3920,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeld: 0
-<<<<<<< HEAD
   itemName: Bread
   gold: 1
   timer: 5
@@ -3961,9 +3927,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
-=======
-  itemSprite: {fileID: 0}
->>>>>>> master
 --- !u!212 &2040501929
 SpriteRenderer:
   m_ObjectHideFlags: 0
