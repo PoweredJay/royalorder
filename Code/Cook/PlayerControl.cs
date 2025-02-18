@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public bool isHoldingSomething;
     public float InteractDistance;
+    public GameObject heldObj;
 
     // Start is called before the first frame update
     void Start()
