@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class ApplianceInteract : MonoBehaviour
     public bool doingTask;
     public TaskType applianceTask;
     public float speed;
+    public float errorRate;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,18 @@ public class ApplianceInteract : MonoBehaviour
         if(doingTask)
         {
             itemScript.AddTime(Time.deltaTime);
+            if((itemScript.curTime >= itemScript.timer) && (!itemScript.taskComplete))
+            {
+                ErrorChance();
+            }
+            if((itemScript.curTime >= 2*itemScript.timer) && (!itemScript.overdone))
+            {
+                itemScript.SetOverdone();
+            }
+            if((itemScript.curTime >= 3*itemScript.timer) && (!itemScript.trash))
+            {
+                itemScript.SetTrash();
+            }
         }
     }
     public void SetItemOnAppliance(GameObject ItemObject, Item item)
@@ -32,6 +46,19 @@ public class ApplianceInteract : MonoBehaviour
         itemOnAppliance.transform.SetParent(this.gameObject.transform);
         itemOnAppliance.transform.localPosition = new Vector3(0,0,0);
         doingTask = true;
+    }
+    public void ErrorChance()
+    {
+        if(itemScript == null)
+        {
+            return;
+        }
+        if(UnityEngine.Random.Range(0f,1f) <= errorRate)
+        {
+            itemScript.SetOverdone();
+            Debug.Log("Oops, no jackpot.");
+        }
+            itemScript.SetComplete();
     }
     public GameObject RemoveItemOnAppliance()
     {
