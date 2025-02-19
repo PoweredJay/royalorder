@@ -28,7 +28,12 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetKeyDown("z"))
         {
-            if(isHoldingSomething)
+            DoRelevantInteraction();
+        }
+    }
+    public void DoRelevantInteraction()
+    {
+        if(isHoldingSomething)
             {
                 if(ApplianceNear(true))
                 {
@@ -53,7 +58,6 @@ public class PlayerControl : MonoBehaviour
                     HoldObject();
                 }
             }
-        }
     }
     public void BeginTask()
     {
@@ -97,38 +101,29 @@ public class PlayerControl : MonoBehaviour
     //Checks to see if there is a holdable object. 
     public void HoldObject()
     {
-        holdableObjects = GameObject.FindGameObjectsWithTag("Held");
-        holdableObjects = holdableObjects.OrderBy(obj => (obj.transform.position - transform.position).sqrMagnitude);
-        closestObj = holdableObjects.First();
-
-        heldObjItem = closestObj.GetComponent<Item>();
-
-        if (Vector2.Distance(closestObj.transform.position, player.transform.position) <= 1.15)
+        if(isHoldingSomething)
         {
-            if(isHoldingSomething){
-                heldObj.transform.SetParent(null);
-                heldObjItem.isHeld = false;
-                heldObj = null;
-                isHoldingSomething = false;
-            }else if (closestObj.tag.Equals("Held"))
-            {
-                if(heldObjItem.canBeInteracted()) 
-                {
-                closestObj.transform.SetParent(player.transform,true);
-                heldObj = closestObj;
-                heldObjItem.isHeld = true;
-                isHoldingSomething = true;
-                heldObj.transform.localPosition = new Vector3(0,1f,0);
-                }
-            }
-        } else
-        {
-            if(isHoldingSomething)
-            {
             heldObj.transform.SetParent(null);
             heldObjItem.isHeld = false;
             heldObj = null;
             isHoldingSomething = false;
+            return;
+        }
+
+        holdableObjects = GameObject.FindGameObjectsWithTag("Held");
+        holdableObjects = holdableObjects.OrderBy(obj => (obj.transform.position - transform.position).sqrMagnitude);
+        closestObj = holdableObjects.First();
+        heldObjItem = closestObj.GetComponent<Item>();
+
+        if (Vector2.Distance(closestObj.transform.position, player.transform.position) <= 1.15)
+        {
+            if(heldObjItem.canBeInteracted()) 
+            {
+            closestObj.transform.SetParent(player.transform,true);
+            heldObj = closestObj;
+            heldObjItem.isHeld = true;
+            isHoldingSomething = true;
+            heldObj.transform.localPosition = new Vector3(0,1f,0);
             }
         }
     }
