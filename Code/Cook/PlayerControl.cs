@@ -48,7 +48,13 @@ public class PlayerControl : MonoBehaviour
                 {
                     if(!isHoldingSomething)
                     {
-                        EndTask();
+                        if(closestApplianceScript.itemOnAppliance != null)
+                        {
+                            EndTask();
+                        } else
+                        {
+                            return;
+                        }
                     } else
                     {
                         HoldObject();

@@ -57,8 +57,10 @@ public class ApplianceInteract : MonoBehaviour
         {
             itemScript.SetOverdone();
             Debug.Log("Oops, no jackpot.");
-        }
+        } else
+        {
             itemScript.SetComplete();
+        }
     }
     public GameObject RemoveItemOnAppliance()
     {
