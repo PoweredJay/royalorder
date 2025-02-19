@@ -25,7 +25,7 @@ public class Item : MonoBehaviour
     GameObject player;
     PlayerControl playControl;
     SpriteRenderer sprRend;
-    Material outlineMaterial;
+    public Material outlineMaterial;
     [Header("Relevant Info")]
     public Sprite rawSprite;
     public Sprite cookedSprite;
@@ -64,19 +64,43 @@ public class Item : MonoBehaviour
     {
 
     }
+    public Color ColorConstruct(int red, int green, int blue, int alpha)
+    {
+        float re = (red/255f);
+        float gr = (green/255f);
+        float bl = (blue/255f);
+        float al = (alpha/255f);
+        return (new Color(re, gr, bl, al));
+    }
+    public Color ColorConstruct(int red, int green, int blue)
+    {
+        float re = (red/255f);
+        float gr = (green/255f);
+        float bl = (blue/255f);
+        return (new Color(re, gr, bl, 1f));
+    }
 
     public void SetComplete()
     {
         taskComplete = true;
-        outlineMaterial.SetColor("_BaseColor",new Color(220,220,220,155));
+        outlineMaterial.SetColor("_OutlineColor", ColorConstruct(175,255,32));
+        sprRend.color = ColorConstruct(255, 247, 97);
+        sprRend.material = outlineMaterial;
     }
     public void SetOverdone()
     {
+        if(!taskComplete)
+        {
+            SetComplete();
+        }
         if(!overdone)
         {
             gold = gold/2;
             repGain = repGain/2;
             overdone = true;
+            outlineMaterial.SetColor("_OutlineColor", ColorConstruct(255, 148, 61));
+            sprRend.color = ColorConstruct(176, 176, 176);
+            sprRend.material = outlineMaterial;
         }
     }
     public void SetTrash()
@@ -87,6 +111,9 @@ public class Item : MonoBehaviour
             repGain = -5;
             trash = true;
             overdone = true;
+            outlineMaterial.SetColor("_OutlineColor", ColorConstruct(255, 0, 0));
+            sprRend.color = ColorConstruct(99,99,99);
+            sprRend.material = outlineMaterial;
         }
     }
     public bool canBeInteracted()
