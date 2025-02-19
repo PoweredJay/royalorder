@@ -31,8 +31,8 @@ public class Item : MonoBehaviour
     public bool isHeld;
     public string itemName;
     public int gold;
-    public int timer;
-    public int curTime;
+    public float timer;
+    public float curTime;
     public bool taskComplete;
     public ItemType itemType;
     public TaskType taskToDo;
@@ -49,44 +49,14 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("z"))
-        {
-            if (Vector2.Distance(obj.transform.position, player.transform.position) <= 1.15)
-            {
-                Debug.Log(obj.tag);
-                if(playControl.isHoldingSomething){
-                    return;
-                }else if (obj.tag.Equals("Held"))
-                {
-                    obj.transform.SetParent(player.transform,true);
-                    playControl.heldObj = obj;
-                    isHeld = true;
-                    playControl.isHoldingSomething = true;
-                } else
-                {
-                    if(playControl.isHoldingSomething){
-                    obj.transform.SetParent(null);
-                    isHeld = false;
-                    playControl.isHoldingSomething = false;
-                }
-                }
-                // check tag of obj for interactions, make this once items can be held and shit
-            } else
-            {
-                if(playControl.isHoldingSomething){
-                obj.transform.SetParent(null);
-                isHeld = false;
-                playControl.isHoldingSomething = false;
-            }
-        }
-            if(isHeld)
-            {
-                obj.transform.localPosition = new Vector3(0,(float)(1 + 0.8*obj.transform.GetSiblingIndex()),0);
-            }
-        }
+        
+    }
+    public void AddTime(float time)
+    {
+        curTime += time;
     }
 
-    public bool canBeInteracted(GameObject interactor)
+    public bool canBeInteracted()
     {
         if(isHeld)
         {
