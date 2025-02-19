@@ -1876,7 +1876,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 69527059}
-  - component: {fileID: 69527058}
   - component: {fileID: 69527057}
   - component: {fileID: 69527056}
   m_Layer: 0
@@ -1958,22 +1957,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
-  itemSprite: {fileID: 0}
---- !u!114 &69527058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69527055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ba0efed2119f4aac1baef58ae4d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 69527055}
-  player: {fileID: 1366564828}
-  isHeld: 0
 --- !u!4 &69527059
 Transform:
   m_ObjectHideFlags: 0
@@ -2043,7 +2026,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 246990235}
-  - component: {fileID: 246990234}
   - component: {fileID: 246990233}
   - component: {fileID: 246990232}
   m_Layer: 0
@@ -2125,21 +2107,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
---- !u!114 &246990234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 246990231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ba0efed2119f4aac1baef58ae4d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 246990231}
-  player: {fileID: 1366564828}
-  isHeld: 0
 --- !u!4 &246990235
 Transform:
   m_ObjectHideFlags: 0
@@ -2164,7 +2131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 300739122}
-  - component: {fileID: 300739121}
   - component: {fileID: 300739120}
   - component: {fileID: 300739119}
   m_Layer: 0
@@ -2246,21 +2212,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
---- !u!114 &300739121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300739118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ba0efed2119f4aac1baef58ae4d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 300739118}
-  player: {fileID: 1366564828}
-  isHeld: 0
 --- !u!4 &300739122
 Transform:
   m_ObjectHideFlags: 0
@@ -2285,7 +2236,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 687278997}
-  - component: {fileID: 687278996}
   - component: {fileID: 687278995}
   - component: {fileID: 687278994}
   m_Layer: 0
@@ -2367,21 +2317,6 @@ MonoBehaviour:
   taskComplete: 0
   itemType: 1
   taskToDo: 1
---- !u!114 &687278996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687278993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ba0efed2119f4aac1baef58ae4d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 687278993}
-  player: {fileID: 1366564828}
-  isHeld: 0
 --- !u!4 &687278997
 Transform:
   m_ObjectHideFlags: 0
@@ -2879,6 +2814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHoldingSomething: 0
   InteractDistance: 1000
+  heldObj: {fileID: 0}
 --- !u!1 &1814490874
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,8 +2826,8 @@ GameObject:
   - component: {fileID: 1814490876}
   - component: {fileID: 1814490875}
   m_Layer: 0
-  m_Name: Cutting Board
-  m_TagString: Interactable
+  m_Name: Frying Pan
+  m_TagString: Appliance
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2911,6 +2847,8 @@ MonoBehaviour:
   obj: {fileID: 1814490874}
   player: {fileID: 1366564828}
   isHeld: 0
+  applianceTask: 1
+  speed: 0
 --- !u!4 &1814490876
 Transform:
   m_ObjectHideFlags: 0
@@ -3867,7 +3805,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2040501927}
-  - component: {fileID: 2040501926}
   - component: {fileID: 2040501928}
   - component: {fileID: 2040501929}
   m_Layer: 0
@@ -3877,21 +3814,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2040501926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040501925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ba0efed2119f4aac1baef58ae4d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 2040501925}
-  player: {fileID: 1366564828}
-  isHeld: 0
 --- !u!4 &2040501927
 Transform:
   m_ObjectHideFlags: 0

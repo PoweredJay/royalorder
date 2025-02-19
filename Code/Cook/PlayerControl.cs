@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -7,60 +8,128 @@ public class PlayerControl : MonoBehaviour
     public bool isHoldingSomething;
     public float InteractDistance;
     public GameObject heldObj;
+    Item heldObjItem;
+    IEnumerable<GameObject> holdableObjects;
+    IEnumerable<GameObject> applianceList;
+    GameObject closestAppliance;
+    ApplianceInteract closestApplianceScript;
+    GameObject closestObj;
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        applianceList = GameObject.FindGameObjectsWithTag("Appliance");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("return") || Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("z"))
         {
-            if(HasCloseObject()){
-                // Debug.Log(GetClosestObject().name);
-            } else {
-                // Debug.Log("Nothing within " + InteractDistance + " units.");
+            if(isHoldingSomething)
+            {
+                if(ApplianceNear(true))
+                {
+                    BeginTask();
+                } else
+                {
+                    HoldObject();
+                }
+            } else
+            {
+                if(ApplianceNear(false))
+                {
+                    if(!isHoldingSomething)
+                    {
+                        EndTask();
+                    } else
+                    {
+                        HoldObject();
+                    } 
+                } else
+                {
+                    HoldObject();
+                }
             }
+        }
+    }
+    public void BeginTask()
+    {
+        closestApplianceScript.SetItemOnAppliance(heldObj,heldObjItem);        
+        heldObjItem.isHeld = false;
+        heldObj = null;
+        heldObjItem = null;
+        isHoldingSomething = false;
+    }
+    public void EndTask()
+    {
+        heldObj = closestApplianceScript.RemoveItemOnAppliance();
+        heldObj.transform.SetParent(player.transform,true);
+        heldObjItem = heldObj.GetComponent<Item>();
+        heldObjItem.isHeld = true;
+        isHoldingSomething = true;
+        heldObj.transform.localPosition = new Vector3(0,1f,0);
 
-        }
     }
-    public bool HasCloseObject()
+
+    public bool ApplianceNear(bool valid)
     {
-       float closest = InteractDistance;
-        GameObject closestObject = null;
-        GameObject[] interactables = GameObject.FindGameObjectsWithTag("Interactable");
-        for (int i = 0; i < interactables.Length; i++)  //list of gameObjects to search through
-        {
-            float dist = Vector2.Distance(interactables[ i ].transform.position, this.transform.position);
-            if (dist < closest)
+        applianceList = applianceList.OrderBy(obj => (obj.transform.position - transform.position).sqrMagnitude);
+        closestAppliance = applianceList.First();
+        closestApplianceScript = closestAppliance.GetComponent<ApplianceInteract>();
+
+        if (Vector2.Distance(closestAppliance.transform.position, player.transform.position) <= 1.15){
+            if(valid)
             {
-            closest = dist;
-            closestObject = interactables[ i ];
+                if(closestAppliance.GetComponent<ApplianceInteract>().applianceTask == heldObjItem.taskToDo)
+                {
+                return true;
+                }
+            } else
+            {
+                return true;
             }
         }
-        if(closestObject != null)
-        {
-            return false;
-        } return true;
+        return false;
     }
-    
-    public GameObject GetClosestObject()
+    //Checks to see if there is a holdable object. 
+    public void HoldObject()
     {
-        float closest = InteractDistance;
-        GameObject closestObject = null;
-        GameObject[] interactables = GameObject.FindGameObjectsWithTag("Interactable");
-        for (int i = 0; i < interactables.Length; i++)  //list of gameObjects to search through
+        holdableObjects = GameObject.FindGameObjectsWithTag("Held");
+        holdableObjects = holdableObjects.OrderBy(obj => (obj.transform.position - transform.position).sqrMagnitude);
+        closestObj = holdableObjects.First();
+
+        heldObjItem = closestObj.GetComponent<Item>();
+
+        if (Vector2.Distance(closestObj.transform.position, player.transform.position) <= 1.15)
         {
-            float dist = Vector2.Distance(interactables[ i ].transform.position, this.transform.position);
-            if (dist < closest)
+            if(isHoldingSomething){
+                heldObj.transform.SetParent(null);
+                heldObjItem.isHeld = false;
+                heldObj = null;
+                isHoldingSomething = false;
+            }else if (closestObj.tag.Equals("Held"))
             {
-            closest = dist;
-            closestObject = interactables[ i ];
+                if(heldObjItem.canBeInteracted()) 
+                {
+                closestObj.transform.SetParent(player.transform,true);
+                heldObj = closestObj;
+                heldObjItem.isHeld = true;
+                isHoldingSomething = true;
+                heldObj.transform.localPosition = new Vector3(0,1f,0);
+                }
+            }
+        } else
+        {
+            if(isHoldingSomething)
+            {
+            heldObj.transform.SetParent(null);
+            heldObjItem.isHeld = false;
+            heldObj = null;
+            isHoldingSomething = false;
             }
         }
-        return closestObject;
     }
 }
