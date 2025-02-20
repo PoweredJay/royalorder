@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 4202673808364823393}
   - component: {fileID: 5005972470384370951}
   - component: {fileID: 7083568566579105151}
+  - component: {fileID: 1633419537316423128}
   m_Layer: 0
   m_Name: Customer
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,3 +236,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1633419537316423128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562749533083524206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48973976fce4e3243be7ebcfa306b659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customerName: Peasant
+  typeWanted: 1
+  ItemWanted: {fileID: 5574390385752378488, guid: b391b542142742841a99d832519dafe3, type: 3}
+  objectHeld: {fileID: 0}
+  timeTaken: 0
+  maxTime: 15
+  skye: 0
+  halfMark: 0
+  done: 0
+  maxRepGain: 10
+  repGain: 0

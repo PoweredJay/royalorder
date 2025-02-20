@@ -11,6 +11,9 @@ public class PlayerControl : MonoBehaviour
     Item heldObjItem;
     IEnumerable<GameObject> holdableObjects;
     IEnumerable<GameObject> applianceList;
+    IEnumerable<GameObject> customerList;
+    GameObject closestCustomer;
+    CustomerMechanics closestCustomerScript;
     GameObject closestAppliance;
     ApplianceInteract closestApplianceScript;
     GameObject closestObj;
@@ -35,7 +38,11 @@ public class PlayerControl : MonoBehaviour
     {
         if(isHoldingSomething)
             {
-                if(ApplianceNear(true))
+                if(CustomerNear())
+                {
+                    GiveItem();
+                }
+                else if(ApplianceNear(true))
                 {
                     BeginTask();
                 } else
@@ -44,21 +51,19 @@ public class PlayerControl : MonoBehaviour
                 }
             } else
             {
-                if(ApplianceNear(false))
+                if(CustomerNear())
                 {
-                    if(!isHoldingSomething)
+                    QueryCustomer();
+                }
+                else if(ApplianceNear(false))
+                {
+                    if(closestApplianceScript.itemOnAppliance != null)
                     {
-                        if(closestApplianceScript.itemOnAppliance != null)
-                        {
-                            EndTask();
-                        } else
-                        {
-                            return;
-                        }
+                        EndTask();
                     } else
                     {
-                        HoldObject();
-                    } 
+                        return;
+                    }
                 } else
                 {
                     HoldObject();
@@ -86,6 +91,10 @@ public class PlayerControl : MonoBehaviour
 
     public bool ApplianceNear(bool valid)
     {
+        if(!applianceList.Any())
+        {
+            return false;
+        }
         applianceList = applianceList.OrderBy(obj => (obj.transform.position - transform.position).sqrMagnitude);
         closestAppliance = applianceList.First();
         closestApplianceScript = closestAppliance.GetComponent<ApplianceInteract>();
@@ -103,6 +112,35 @@ public class PlayerControl : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public bool CustomerNear()
+    {
+        customerList = GameObject.FindGameObjectsWithTag("Customer");
+        if(!customerList.Any())
+        {
+            return false;
+        }
+        customerList = customerList.OrderBy(obj => (obj.transform.position - transform.position).sqrMagnitude);
+        closestCustomer = customerList.First();
+        closestCustomerScript = closestCustomer.GetComponent<CustomerMechanics>();
+
+        if (Vector2.Distance(closestCustomer.transform.position, player.transform.position) <= 1.15){
+            return true;
+        }
+        return false;
+    }
+    public void QueryCustomer()
+    {
+        Debug.Log(closestCustomerScript.customerName + " wants " + closestCustomerScript.ItemWanted.itemName + ". They will stay for " + closestCustomerScript.maxTime + " seconds.");
+    }
+    public void GiveItem()
+    {
+        closestCustomerScript.ReceiveItem(heldObj,heldObjItem);        
+        heldObjItem.isHeld = false;
+        heldObj = null;
+        heldObjItem = null;
+        isHoldingSomething = false;
     }
     //Checks to see if there is a holdable object. 
     public void HoldObject()
