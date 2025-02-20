@@ -15,6 +15,6 @@ public class LevelSelector : MonoBehaviour
     public void LoadSelectedScene(string scene)
     {
         SceneManager.LoadScene(scene);
-        menuMusic.StopMusic();
+        
     }
 }
