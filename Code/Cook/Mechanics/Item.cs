@@ -32,7 +32,6 @@ public class Item : MonoBehaviour
     public bool isHeld;
     public string itemName;
     public int gold;
-    public int repGain;
     public float timer;
     public float curTime;
     public bool taskComplete;
@@ -60,9 +59,9 @@ public class Item : MonoBehaviour
     {
         curTime += time;
     }
-    public void CashOut()
+    public int CashOut()
     {
-
+        return gold;
     }
     public Color ColorConstruct(int red, int green, int blue, int alpha)
     {
@@ -96,7 +95,6 @@ public class Item : MonoBehaviour
         if(!overdone)
         {
             gold = gold/2;
-            repGain = repGain/2;
             overdone = true;
             outlineMaterial.SetColor("_OutlineColor", ColorConstruct(255, 148, 61));
             sprRend.color = ColorConstruct(176, 176, 176);
@@ -108,7 +106,6 @@ public class Item : MonoBehaviour
         if(!trash)
         {
             gold = 0;
-            repGain = -5;
             trash = true;
             overdone = true;
             outlineMaterial.SetColor("_OutlineColor", ColorConstruct(255, 0, 0));
