@@ -6,7 +6,8 @@ using UnityEngine;
 public class CustomerMechanics : MonoBehaviour
 {
     public string customerName;
-    public ItemType typeWanted;
+    public ItemType typeWanted1;
+    public ItemType typeWanted2;
     public Item ItemWanted;
     public GameObject objectHeld;
     Item itemHeld;
@@ -19,12 +20,26 @@ public class CustomerMechanics : MonoBehaviour
     public float maxRepGain;
     public float repGain;
     CookSystem cookingSystem;
+    FoodSelect foodSelect;
     // Start is called before the first frame update
     void Start()
     {
         pathScript = GetComponent<CustomerPathfind>();
         cookingSystem = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<CookSystem>();
         repGain = maxRepGain;
+        foodSelect = GetComponent<FoodSelect>();
+        List<GameObject> choices = new List<GameObject>();
+        List<GameObject> choices1 = foodSelect.Select(typeWanted1);
+        List<GameObject> choices2 = foodSelect.Select(typeWanted2);
+        for (int i = 0; i < choices1.Count; i++)
+        {
+            choices.Add(choices1[i]);
+        }
+        for (int i = 0; i < choices2.Count; i++)
+        {
+            choices.Add(choices2[i]);
+        }
+        ItemWanted = choices[(int) UnityEngine.Random.Range(0f, choices.Count)].GetComponent<Item>();
     }
 
     // Update is called once per frame
@@ -40,6 +55,7 @@ public class CustomerMechanics : MonoBehaviour
     public void StartClock()
     {
         skye = true;
+        // speech bubble here
         Debug.Log("Time's ticking!");
     }
 
@@ -90,6 +106,7 @@ public class CustomerMechanics : MonoBehaviour
             skye = false;
             SatisfyCustomer(itemHeld);
             cookingSystem.ModifySystem((int)repGain,(itemHeld.CashOut()));
+            // wait then pick customer task
         } else
         {
             Debug.Log("Not correct item!");

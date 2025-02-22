@@ -9,7 +9,7 @@ public class CustomerPathfind : MonoBehaviour
 {
     private AIPath path;
     [SerializeField] private float moveSpeed;
-    [SerializeField] public Transform target;
+    public Transform target;
     bool arrived;
     CustomerMechanics mech;
     Rigidbody2D rigidb;
