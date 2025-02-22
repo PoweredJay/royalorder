@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 5005972470384370951}
   - component: {fileID: 7083568566579105151}
   - component: {fileID: 1633419537316423128}
+  - component: {fileID: 8589372939009763830}
   m_Layer: 0
-  m_Name: Customer
+  m_Name: Peasant
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,8 +250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerName: Peasant
-  typeWanted: 1
-  ItemWanted: {fileID: 5574390385752378488, guid: b391b542142742841a99d832519dafe3, type: 3}
+  typeWanted1: 1
+  typeWanted2: 1
+  ItemWanted: {fileID: 0}
   objectHeld: {fileID: 0}
   timeTaken: 0
   maxTime: 15
@@ -259,3 +261,23 @@ MonoBehaviour:
   done: 0
   maxRepGain: 10
   repGain: 0
+--- !u!114 &8589372939009763830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562749533083524206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ba219f7e0bea34c8ecb1339f995611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simple:
+  - {fileID: 4580964045689744277, guid: b391b542142742841a99d832519dafe3, type: 3}
+  - {fileID: 4580964045689744277, guid: 950fde9c765c7614c941807be478b901, type: 3}
+  - {fileID: 4580964045689744277, guid: c7a1bc90fbf489e478ff2156bac9c9d3, type: 3}
+  royal: []
+  leafy: []
+  hearty: []
+  beverage: []

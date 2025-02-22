@@ -83,8 +83,9 @@ public class Item : MonoBehaviour
     {
         taskComplete = true;
         outlineMaterial.SetColor("_OutlineColor", ColorConstruct(175,255,32));
-        sprRend.color = ColorConstruct(255, 247, 97);
+        // sprRend.color = ColorConstruct(255, 247, 97);
         sprRend.material = outlineMaterial;
+        sprRend.sprite = cookedSprite;
     }
     public void SetOverdone()
     {
