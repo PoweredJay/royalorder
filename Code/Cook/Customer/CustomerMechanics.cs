@@ -40,6 +40,12 @@ public class CustomerMechanics : MonoBehaviour
             choices.Add(choices2[i]);
         }
         ItemWanted = choices[(int) UnityEngine.Random.Range(0f, choices.Count)].GetComponent<Item>();
+        Instantiate(new GameObject(), this.transform.GetChild(0).transform);
+        var sprRender = this.transform.GetChild(0).transform.GetChild(0).gameObject.AddComponent<SpriteRenderer>();
+        var sprite = ItemWanted.cookedSprite;
+        sprRender.sprite = sprite;
+        this.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
+        Destroy(GameObject.Find("New Game Object"));
     }
 
     // Update is called once per frame
@@ -55,7 +61,8 @@ public class CustomerMechanics : MonoBehaviour
     public void StartClock()
     {
         skye = true;
-        // speech bubble here
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        this.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
         Debug.Log("Time's ticking!");
     }
 
