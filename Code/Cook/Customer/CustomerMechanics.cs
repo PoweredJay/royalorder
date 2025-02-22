@@ -2,12 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum CustomerTask 
+{
+        NONE,
+        SLEEP,
+        STEAL,
+        RUCKUS,
+        COMPLAIN,
+        EXTRA
+}
 public class CustomerMechanics : MonoBehaviour
 {
     public string customerName;
     public ItemType typeWanted1;
     public ItemType typeWanted2;
+    public CustomerTask task1;
+    public CustomerTask task2;
     public Item ItemWanted;
     public GameObject objectHeld;
     Item itemHeld;
@@ -113,10 +123,41 @@ public class CustomerMechanics : MonoBehaviour
             skye = false;
             SatisfyCustomer(itemHeld);
             cookingSystem.ModifySystem((int)repGain,(itemHeld.CashOut()));
-            // wait then pick customer task
+            int taskChoose = UnityEngine.Random.Range(0, 2);
+            if (taskChoose == 0)
+            {
+                // customeer task (task1)
+            }
+            else if (taskChoose == 1)
+            {
+                // customeer task (task2)
+            }
         } else
         {
             Debug.Log("Not correct item!");
+        }
+    }
+    void Task(CustomerTask task)
+    {
+        if (task == CustomerTask.SLEEP)
+        {
+
+        }
+        else if (task == CustomerTask.STEAL)
+        {
+            
+        }
+        else if (task == CustomerTask.RUCKUS)
+        {
+            
+        }
+        else if (task == CustomerTask.COMPLAIN)
+        {
+            
+        }
+        else if (task == CustomerTask.EXTRA)
+        {
+            
         }
     }
 }
