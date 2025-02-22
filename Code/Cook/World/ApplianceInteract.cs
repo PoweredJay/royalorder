@@ -7,6 +7,10 @@ public class ApplianceInteract : MonoBehaviour
 {
     public GameObject self;
     public GameObject itemOnAppliance;
+    SpriteRenderer sprRend;
+    Animator sprAnim;
+    public Sprite inactiveSprite;
+    public Sprite activeSprite;
     Item itemScript;
     public GameObject player;
     public bool doingTask;
@@ -16,7 +20,10 @@ public class ApplianceInteract : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        sprRend = GetComponent<SpriteRenderer>();
+        sprAnim = GetComponent<Animator>();
+        sprRend.sprite = inactiveSprite;
+        sprAnim.enabled = false;
     }
 
     // Update is called once per frame
@@ -45,7 +52,8 @@ public class ApplianceInteract : MonoBehaviour
         itemScript = item;
         itemOnAppliance.transform.SetParent(this.gameObject.transform);
         itemOnAppliance.transform.localPosition = new Vector3(0,0,0);
-        doingTask = true;
+        itemOnAppliance.transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+        ToggleTask();
     }
     public void ErrorChance()
     {
@@ -64,16 +72,24 @@ public class ApplianceInteract : MonoBehaviour
     }
     public GameObject RemoveItemOnAppliance()
     {
+        itemOnAppliance.transform.localScale = new Vector3(1f,1f,1f);
         GameObject itemToReturn = itemOnAppliance;
         itemOnAppliance = null;
         itemScript = null;
-        doingTask = false;
-        Debug.Log("Task off");
+        ToggleTask();
         return itemToReturn;
     }
     public void ToggleTask()
     {
         doingTask = !doingTask;
-
+        if(doingTask)
+        {
+            sprAnim.enabled = true;
+            sprRend.sprite = activeSprite;
+        } else
+        {
+            sprAnim.enabled = false;
+            sprRend.sprite = inactiveSprite;
+        }
     }
 }
