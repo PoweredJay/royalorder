@@ -2,22 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum CustomerTask 
+public enum CustomerState 
 {
         NONE,
+        EAT,
         SLEEP,
         STEAL,
         RUCKUS,
         COMPLAIN,
-        EXTRA
+        EXTRA,
+        LEAVE
 }
 public class CustomerMechanics : MonoBehaviour
 {
     public string customerName;
     public ItemType typeWanted1;
     public ItemType typeWanted2;
-    public CustomerTask task1;
-    public CustomerTask task2;
+    public CustomerState task1;
+    public CustomerState task2;
+    public CustomerState currentState;
     public Item ItemWanted;
     public GameObject objectHeld;
     Item itemHeld;
@@ -31,6 +34,7 @@ public class CustomerMechanics : MonoBehaviour
     public float repGain;
     CookSystem cookingSystem;
     FoodSelect foodSelect;
+    public Chair chair;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +77,7 @@ public class CustomerMechanics : MonoBehaviour
         skye = true;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         this.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-        Debug.Log("Time's ticking!");
+        Debug.Log("Time's ticking!"); // add effect to make the thingy show how much time you have left somehow
     }
 
     public void TimeUpdate()
@@ -123,41 +127,72 @@ public class CustomerMechanics : MonoBehaviour
             skye = false;
             SatisfyCustomer(itemHeld);
             cookingSystem.ModifySystem((int)repGain,(itemHeld.CashOut()));
-            int taskChoose = UnityEngine.Random.Range(0, 2);
-            if (taskChoose == 0)
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            this.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
+            int taskChoose = -1;
+            if (currentState != CustomerState.EXTRA && taskChoose == 0)
             {
-                // customeer task (task1)
+                StartCoroutine(Task(task1));
             }
-            else if (taskChoose == 1)
+            else if (currentState != CustomerState.EXTRA && taskChoose == 1)
             {
-                // customeer task (task2)
+                StartCoroutine(Task(task2));
+            }
+            else
+            {
+                StartCoroutine(Task(CustomerState.LEAVE));
             }
         } else
         {
             Debug.Log("Not correct item!");
         }
     }
-    void Task(CustomerTask task)
+    IEnumerator Task(CustomerState task)
     {
-        if (task == CustomerTask.SLEEP)
+        yield return new WaitForSeconds(UnityEngine.Random.Range(5f, 15f));
+        if (task == CustomerState.SLEEP)
         {
 
         }
-        else if (task == CustomerTask.STEAL)
+        else if (task == CustomerState.STEAL)
+        {
+            // pathScript.target = (location of food)
+            // currentState = CustomerState.STEAL;
+            // pathScript.arrived = false;
+        }
+        else if (task == CustomerState.RUCKUS)
         {
             
         }
-        else if (task == CustomerTask.RUCKUS)
+        else if (task == CustomerState.COMPLAIN)
         {
             
         }
-        else if (task == CustomerTask.COMPLAIN)
+        else if (task == CustomerState.EXTRA)
         {
-            
+            List<GameObject> choices = new List<GameObject>();
+            List<GameObject> choices1 = foodSelect.Select(typeWanted1);
+            List<GameObject> choices2 = foodSelect.Select(typeWanted2);
+            for (int i = 0; i < choices1.Count; i++)
+            {
+                choices.Add(choices1[i]);
+            }
+            for (int i = 0; i < choices2.Count; i++)
+            {
+                choices.Add(choices2[i]);
+            }
+            ItemWanted = choices[(int) UnityEngine.Random.Range(0f, choices.Count)].GetComponent<Item>();
+            var sprRender = this.transform.GetChild(0).transform.GetChild(0).gameObject.AddComponent<SpriteRenderer>();
+            var sprite = ItemWanted.cookedSprite;
+            sprRender.sprite = sprite;
+            StartClock();
         }
-        else if (task == CustomerTask.EXTRA)
+        else if (task == CustomerState.LEAVE)
         {
-            
+            pathScript.target = GameObject.Find("Exit").transform;
+            pathScript.arrived = false;
+            pathScript.rigidb.simulated = true;
+            currentState = CustomerState.LEAVE;
         }
     }
 }

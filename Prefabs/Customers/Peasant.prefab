@@ -145,7 +145,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 1
-  enableRotation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
     interval: 0.5
@@ -176,6 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   target: {fileID: 0}
+  arrived: 0
+  rigidb: {fileID: 0}
 --- !u!50 &5005972470384370951
 Rigidbody2D:
   serializedVersion: 4
@@ -253,6 +255,9 @@ MonoBehaviour:
   customerName: Peasant
   typeWanted1: 1
   typeWanted2: 1
+  task1: 2
+  task2: 3
+  currentState: 0
   ItemWanted: {fileID: 0}
   objectHeld: {fileID: 0}
   timeTaken: 0
@@ -262,6 +267,7 @@ MonoBehaviour:
   done: 0
   maxRepGain: 10
   repGain: 0
+  chair: {fileID: 0}
 --- !u!114 &8589372939009763830
 MonoBehaviour:
   m_ObjectHideFlags: 0

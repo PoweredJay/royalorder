@@ -133,6 +133,8 @@ public class PlayerControl : MonoBehaviour
     public void QueryCustomer()
     {
         Debug.Log(closestCustomerScript.customerName + " wants " + closestCustomerScript.ItemWanted.itemName + ". They will stay for " + closestCustomerScript.maxTime + " seconds.");
+        // if customer is in the process of stealing
+        // they stop and leave
     }
     public void GiveItem()
     {
