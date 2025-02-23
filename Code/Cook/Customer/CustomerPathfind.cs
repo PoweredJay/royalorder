@@ -10,9 +10,9 @@ public class CustomerPathfind : MonoBehaviour
     private AIPath path;
     [SerializeField] private float moveSpeed;
     public Transform target;
-    bool arrived;
+    public bool arrived;
     CustomerMechanics mech;
-    Rigidbody2D rigidb;
+    public Rigidbody2D rigidb;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +31,12 @@ public class CustomerPathfind : MonoBehaviour
         if (!arrived && Vector2.Distance(this.GetComponent<Transform>().position, target.position) <= 0.015)
         {
             arrived = true;
-            mech.StartClock();
-            rigidb.simulated = false;
+            if (this.gameObject.GetComponent<CustomerMechanics>().currentState == CustomerState.NONE)
+            {
+                mech.StartClock();
+                rigidb.simulated = false;
+                this.gameObject.GetComponent<CustomerMechanics>().currentState = CustomerState.EAT;
+            }
         }
     }
     // public void FindTarget()

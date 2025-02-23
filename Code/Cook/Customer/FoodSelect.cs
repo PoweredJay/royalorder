@@ -16,6 +16,22 @@ public class FoodSelect : MonoBehaviour
         {
             return simple;
         }
+        else if (type == ItemType.ROYAL)
+        {
+            return royal;
+        }
+        else if (type == ItemType.LEAFY)
+        {
+            return leafy;
+        }
+        else if (type == ItemType.HEARTY)
+        {
+            return hearty;
+        }
+        else if (type == ItemType.BEVERAGE)
+        {
+            return beverage;
+        }
         else
         {
             return simple;
