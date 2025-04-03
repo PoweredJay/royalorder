@@ -118,7 +118,7 @@ public class CustomerMechanics : MonoBehaviour
     }
     public void ReceiveItem(GameObject ItemObject, Item item)
     {
-        if((item.itemName == ItemWanted.itemName) && (item.taskComplete))
+        if((item.itemName == ItemWanted.itemName) && (item.taskComplete) && (item.platingDone))
         {
             objectHeld = ItemObject;
             itemHeld = item;

@@ -1,26 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum ItemType {
-        NONE,
-        SIMPLE,
-        BEVERAGE,
-        ROYAL,
-        LEAFY,
-        HEARTY,
-        PLATE
-    }
-    public enum TaskType {
-        NONE,
-        PAN,
-        BOARD,
-        OVEN,
-        BOWL,
-        POT,
-        KEG,
-        PLATE
-    }
-public class Item : MonoBehaviour
+public class CombinedItem : MonoBehaviour
 {
     //Behind the scenes stuff
     GameObject obj;
